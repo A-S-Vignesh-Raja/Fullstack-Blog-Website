@@ -4,7 +4,7 @@ const mongoose=require('mongoose');
 const User=require('./models/user');
 const bcrypt=require('bcryptjs');
 const cors=require('cors');
-const jwt=require('jsonwebtoken');
+const jwt=require('jsonwebtoken'); 
 
 const salt= bcrypt.genSaltSync(10);
 const secret='kaudg127198iuwdh919edubLDJ';
