@@ -38,7 +38,7 @@ app.post('/login',async (req,res)=>{
         jwt.sign({username,id:userdoc._id}, secret,{},(err,token)=>{
             if(err) throw err;
             res.cookie('token', token).json({
-                id:userDoc._id,
+                id:userdoc._id,
                 username,
             });
         } );
@@ -48,11 +48,15 @@ app.post('/login',async (req,res)=>{
 });
 
 app.get('/profile',(req,res)=>{
-    const {token} = req.cookies;
-    jwt.verify(token,secret,{},(err,info)=>{
-        if (err) throw err;
-        res.json(info);
-    });
+    const token = req.cookies?.token
+        if(token){
+            jwt.verify(token,secret,{},(err,info)=>{
+                if (err) throw err;
+                res.json(info);
+            });
+        } else{
+            res.status(401).json("unauthorized");
+        }
     
 });
 

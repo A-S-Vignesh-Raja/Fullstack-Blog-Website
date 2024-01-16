@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 
@@ -19,7 +19,6 @@ export default function LoginPage(){
             response.json().then(userInfo =>{
                 setUserInfo(userInfo);
                 setRedirect(true);
-
             })
         }
         else{
