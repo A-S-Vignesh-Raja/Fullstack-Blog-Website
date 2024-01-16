@@ -8,7 +8,7 @@ export default function CreatePost(){
     const [content,setContent]= useState('');
     return(
         <form>
-            <input type="title" 
+            <input type="title"  
                 placeholder={'Title'} 
                 value={title} 
                 onChange={ev => setTitle(ev.target.value)}/>
