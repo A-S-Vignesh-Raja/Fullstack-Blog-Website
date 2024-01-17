@@ -6,6 +6,8 @@ const bcrypt=require('bcryptjs');
 const cors=require('cors');
 const jwt=require('jsonwebtoken'); 
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
+const uploadMiddleware = multer({dest: 'uploads/'});
 
 const salt= bcrypt.genSaltSync(10);
 const secret='kaudg127198iuwdh919edubLDJ';
@@ -64,7 +66,12 @@ app.post('/logout',(req,res)=>{
     res.cookie('token','').json('ok');
 });
 
-
+app.post('/post',uploadMiddleware.single('file'), (req,res)=>{
+    const {originalname}=req.file;
+    const parts = originalname.split('.');
+    const ext = parts[parts.length - 1];
+    res.json({ext});
+})
 
 app.listen(4040,()=>{
     console.log("server started ");
