@@ -87,9 +87,8 @@ app.post('/post',uploadMiddleware.single('file'), async (req,res)=>{
 })
 
 
-app.get('/post',async(req,res)=>{
-    const posts = await Post.find();
-    res.json(posts);
+app.get('/post',async(req,res)=>{ 
+    res.json(await Post.find());
 })
 app.listen(4040,()=>{
     console.log("server started ");
