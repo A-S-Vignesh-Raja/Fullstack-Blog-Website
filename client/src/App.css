@@ -23,6 +23,7 @@ header{
 header a{
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 
 header a.logo{
@@ -99,6 +100,7 @@ button{
   border: 0;
   padding: 7px 0;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 form.login h1 , form.register h1{
