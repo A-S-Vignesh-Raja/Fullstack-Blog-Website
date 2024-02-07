@@ -15,6 +15,7 @@ export default function Editor({value,onChange}) {
       ['clean'],
     ],
   };
+  
   return (
     <div className="content">
     <ReactQuill
