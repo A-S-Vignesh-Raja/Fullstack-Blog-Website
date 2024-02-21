@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import { useContext, useEffect, useState} from 'react';
 import { UserContext } from "./UserContext";
+import logo from "./logo.png";
 
 
 export default function Header(){
@@ -28,7 +29,7 @@ export default function Header(){
 
     return (
         <header>
-        <Link to="/" className="logo">ZenZest</Link>
+        <Link to="/" className="logo"><img src={logo}></img></Link>
         <nav>
           {username &&(
             <>

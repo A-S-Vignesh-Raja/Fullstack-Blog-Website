@@ -14,8 +14,8 @@ main{
 header{
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   align-items: center;
 }
 
@@ -25,14 +25,12 @@ header a{
   cursor: pointer;
 }
 
-header a.logo{
-  font-weight: bold;
-  font-size: 1.6rem;
-}
 
 header nav{
   display: flex;
   gap: 15px;
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 
 div.post{
@@ -160,4 +158,9 @@ div.post-page a.edit-btn{
 }
 a svg{
   height:20px;
+}
+
+.logo img{
+  width: 200px;
+  height: 150px;
 }
