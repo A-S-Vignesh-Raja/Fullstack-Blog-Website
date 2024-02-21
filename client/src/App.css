@@ -25,7 +25,6 @@ header a{
   cursor: pointer;
 }
 
-
 header nav{
   display: flex;
   gap: 15px;
