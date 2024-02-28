@@ -15,6 +15,7 @@ export default function IndexPage(){
             {posts.length > 0 && posts.map(post => (
                 <Post {...post}/>
             ))}
+
         </>
     );
 }
