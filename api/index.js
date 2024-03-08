@@ -120,6 +120,12 @@ app.post('/post',uploadMiddleware.single('file'), async (req,res)=>{
             cover:url,
             author:info.id
         });
+        fs.unlink(path,(err)=>{
+            if(err){
+                throw err;
+            }
+            console.log("file goneeeee")    
+        });
         res.json({Postdoc});
     });
 })
