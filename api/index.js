@@ -127,11 +127,14 @@ app.post('/post',uploadMiddleware.single('file'), async (req,res)=>{
 app.put('/post',uploadMiddleware.single('file'), async (req,res) => {
     let newPath = null;
     if (req.file) {
-      const {originalname,path} = req.file;
-      const parts = originalname.split('.');
-      const ext = parts[parts.length - 1];
-      newPath = path+'.'+ext;
-      fs.renameSync(path, newPath);
+      const {path} = req.file;
+      const response=await cloudinary.uploader.upload(path);
+      const {url} = response;
+      newPath=url;
+    //   const parts = originalname.split('.');
+    //   const ext = parts[parts.length - 1];
+    //   newPath = path+'.'+ext;
+    //   fs.renameSync(path, newPath);
     }
   
     const {token} = req.cookies;
