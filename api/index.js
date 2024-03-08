@@ -14,11 +14,19 @@ const dotenv=require('dotenv');
 dotenv.config();
 const salt= bcrypt.genSaltSync(10);
 const secret='kaudg127198iuwdh919edubLDJ';
+const cloudinary=require('cloudinary');
+
 
 app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+ '/uploads'));
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+  });
 
 mongoose.connect(process.env.MONGO_URI)
 
@@ -70,7 +78,7 @@ app.post('/logout',(req,res)=>{
     res.cookie('token','').json('ok');
 });
 
-app.post('/post',uploadMiddleware.single('file'), async (req,res)=>{
+/*app.post('/post',uploadMiddleware.single('file'), async (req,res)=>{
     const {originalname,path}=req.file;
     const parts = originalname.split('.');
     const ext = parts[parts.length - 1];
@@ -86,6 +94,30 @@ app.post('/post',uploadMiddleware.single('file'), async (req,res)=>{
             summary,
             content,
             cover:newPath,
+            author:info.id
+        });
+        res.json({Postdoc});
+    });
+})*/
+app.post('/post',uploadMiddleware.single('file'), async (req,res)=>{
+    const {path}=req.file;
+    const response=await cloudinary.uploader.upload(path);
+    const {url} = response;
+    console.log(url);
+    // const parts = originalname.split('.');
+    // const ext = parts[parts.length - 1];
+    // const newPath=path+'.'+ext;
+    // fs.renameSync(path, newPath);
+
+    const token = req.cookies?.token
+    jwt.verify(token,secret,{},async (err,info)=>{
+        if (err) throw err;
+        const {title,summary,content} = req.body;
+        const Postdoc = await Post.create({
+            title,
+            summary,
+            content,
+            cover:url,
             author:info.id
         });
         res.json({Postdoc});

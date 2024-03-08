@@ -18,7 +18,7 @@ export default function PostPage(){
     },[]);
 
     if (!postInfo) return '';
-
+    console.log(postInfo.cover);
     return(
         <div className="post-page">
             <h1>{postInfo.title}</h1>
@@ -35,10 +35,12 @@ export default function PostPage(){
                 </div>
             )}
             <div className="image">
-                <img src={`http://localhost:4040/${postInfo.cover}`} alt=""/>
+                <img src={`${postInfo.cover}`} alt=""/>
+                
             </div>
             
             <div className="content" dangerouslySetInnerHTML={{__html:postInfo.content}} />
         </div>
     );
+    
 }
