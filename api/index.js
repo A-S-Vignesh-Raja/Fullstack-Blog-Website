@@ -10,7 +10,8 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({dest: 'uploads/'});
 const fs = require('fs');
-
+const dotenv=require('dotenv');
+dotenv.config();
 const salt= bcrypt.genSaltSync(10);
 const secret='kaudg127198iuwdh919edubLDJ';
 
@@ -19,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+ '/uploads'));
 
-mongoose.connect('mongodb+srv://asvigneshraja:viki2003@cluster0.xfegulv.mongodb.net/')
+mongoose.connect(process.env.MONGO_URI)
 
 app.post('/register', async (req,res)=>{
     const {username,password}=req.body;
@@ -144,5 +145,3 @@ app.listen(4040,()=>{
     console.log("server started ");
 });
 
-//mongodb+srv://asvigneshraja:viki2003@cluster0.xfegulv.mongodb.net/?retryWrites=true&w=majority
-//mongodb+srv://asvigneshraja:viki2003@cluster0.xfegulv.mongodb.net/
