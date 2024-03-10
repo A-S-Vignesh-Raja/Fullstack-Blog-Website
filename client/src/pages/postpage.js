@@ -20,7 +20,7 @@ export default function PostPage(){
 
     function handleDelete(ev){
         ev.preventDefault();
-        fetch(`http://localhost:4040/delete/${id}`)
+        fetch(`http://localhost:4040/delete/${id}`,{method:'DELETE'})
         .then(response => {
             response.json()
             .then(response =>{

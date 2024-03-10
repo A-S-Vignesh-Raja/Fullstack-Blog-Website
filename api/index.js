@@ -182,7 +182,7 @@ app.get('/post/:id', async (req, res) => {
     res.json(postDoc);
   })
 
-app.get('/delete/:id',async(req,res)=>{
+app.delete('/delete/:id',async(req,res)=>{
     const {id}=req.params;
     await Post.findByIdAndDelete(id)
     res.status(204);
