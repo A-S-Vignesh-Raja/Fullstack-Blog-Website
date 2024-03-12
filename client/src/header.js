@@ -16,6 +16,7 @@ export default function Header(){
       });
 
     },[]);
+    
 
     function logout(){
       fetch('http://localhost:4040/logout',{
