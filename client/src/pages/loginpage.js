@@ -9,7 +9,7 @@ export default function LoginPage(){
     const {setUserInfo}= useContext(UserContext);
     async function login(ev){
         ev.preventDefault();
-        const response=await fetch('http://localhost:4040/login',{
+        const response=await fetch(`${process.env.REACT_APP_API_URL}/login`,{
             method:'POST',
             body:JSON.stringify({username,password}),
             headers:{'Content-Type':'application/json'},

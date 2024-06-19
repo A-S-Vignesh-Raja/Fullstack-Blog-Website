@@ -10,7 +10,7 @@ export default function PostPage(){
     const navigate=useNavigate();
 
     useEffect(()=>{
-        fetch(`http://localhost:4040/post/${id}`)
+        fetch(`${process.env.REACT_APP_API_URL}/post/${id}`)
         .then(response => {
             response.json().then(postInfo => {
                 setPostInfo(postInfo);
@@ -20,7 +20,7 @@ export default function PostPage(){
 
     function handleDelete(ev){
         ev.preventDefault();
-        fetch(`http://localhost:4040/delete/${id}`,{method:'DELETE'})
+        fetch(`${process.env.REACT_APP_API_URL}/delete/${id}`,{method:'DELETE'})
         .then(response => {
             response.json()
             .then(response =>{
