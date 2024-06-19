@@ -599,6 +599,7 @@ app.post('/register', async (req, res) => {
     }
 });
 
+/*
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const userdoc = await User.findOne({ username });
@@ -610,6 +611,26 @@ app.post('/login', async (req, res) => {
         jwt.sign({ username, id: userdoc._id }, secret, {}, (err, token) => {
             if (err) throw err;
             res.cookie('token', token, { httpOnly: true }).json({
+                id: userdoc._id,
+                username,
+            });
+        });
+    } else {
+        res.status(400).json("wrong credentials");
+    }
+});*/
+
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    const userdoc = await User.findOne({ username });
+    if (!userdoc) {
+        return res.status(400).json("wrong credentials");
+    }
+    const passok = bcrypt.compareSync(password, userdoc.password);
+    if (passok) {
+        jwt.sign({ username, id: userdoc._id }, secret, {}, (err, token) => {
+            if (err) throw err;
+            res.cookie('token', token, { httpOnly: true,sameSite : 'none' }).json({
                 id: userdoc._id,
                 username,
             });
