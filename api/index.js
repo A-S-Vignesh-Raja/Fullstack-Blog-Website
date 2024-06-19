@@ -167,7 +167,7 @@ app.put('/post',uploadMiddleware.single('file'), async (req,res) => {
   
   });
   
-
+ 
 app.get('/post',async(req,res)=>{ 
     res.json(
         await Post.find()
@@ -182,7 +182,7 @@ app.get('/post/:id', async (req, res) => {
     const postDoc = await Post.findById(id).populate('author', ['username']);
     res.json(postDoc);
   })
-
+ 
 app.delete('/delete/:id',async(req,res)=>{
     const {id}=req.params;
     await Post.findByIdAndDelete(id)
