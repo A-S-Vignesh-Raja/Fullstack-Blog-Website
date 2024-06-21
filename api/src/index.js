@@ -22,8 +22,8 @@ const allowedOrigins = [process.env.ORIGIN_1, process.env.ORIGIN_2];
 app.use(cors({
     credentials: true,
     origin: function (origin, callback) {
-        console.log('Origin:', origin);  // Log the origin
-        if (!origin) return callback(null, true); // Allow requests with no origin (e.g., mobile apps, curl requests)
+        console.log('Origin:', origin);  
+        if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
             const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
             return callback(new Error(msg), false);
